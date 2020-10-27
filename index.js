@@ -1,9 +1,20 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
+const mahasiswaRoute = require("./mahasiswa.route")
 
 const app = express();
 
 app.use(bodyParser.json())
+
+// rest-api adalah contoh nama database
+const dbUri = 'mongodb://localhost:27017/rest-api';
+mongoose.connect(dbUri);
+mongoose.connection.on("connected", () => {
+  console.log("Mongo berhasil terkoneksi");
+});
+
+app.use('/mahasiswa', mahasiswaRoute)
 
 /*
 Handle method GET dengan alamat / , lalu kirimkan response hello world

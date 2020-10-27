@@ -1,12 +1,23 @@
 const express = require("express");
+const bodyParser = require("body-parser");
 
 const app = express();
 
+app.use(bodyParser.json())
+
 /*
-Handle alamat / , lalu kirimkan response hello world
+Handle method GET dengan alamat / , lalu kirimkan response hello world
 */
 app.get('/', (req, res) => {
   res.json({ message: "Hello world" });
+})
+
+/*
+Handle method POST dengan alamat /penjumlahan ,
+lalu kirimkan response hasil penjumlahan
+*/
+app.post('/penjumlahan', (req, res)=> {
+  res.json({result: req.body.a + req.body.b})
 })
 
 /*
